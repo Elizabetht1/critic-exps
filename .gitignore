@@ -1,0 +1,10 @@
+__pycache__/
+*.py[cod]
+.venv/
+runs/
+checkpoints/
+*.pt
+.ipynb_checkpoints/
+.pytest_cache/
+wandb/
+uv.lock

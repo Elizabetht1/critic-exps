@@ -1,0 +1,45 @@
+[project]
+name = "offline-rl"
+version = "0.1.0"
+description = "Critic estimation bias in offline-to-online RL on HalfCheetah"
+readme = "README.md"
+authors = [
+    { name = "Elizabeth Terveen", email = "eterveen@amazon.com" }
+]
+requires-python = ">=3.12"
+dependencies = [
+    # torch >=2.7 ships only manylinux_2_28 wheels; this host is Amazon Linux 2 (glibc 2.26),
+    # so 2.6.0 (manylinux1, CUDA 12.4) is the newest installable build.
+    "torch>=2.6,<2.7",
+    "gymnasium[mujoco]>=1.0",
+    "minari[hdf5,hf]>=0.5.4",
+    "numpy>=2.0",
+    "tyro>=0.9",
+    "wandb>=0.19",
+    "tqdm",
+]
+
+[project.optional-dependencies]
+notebooks = [
+    "pandas>=2.2",
+    "matplotlib>=3.9",
+    "jupyter",
+    "ipykernel",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8",
+    "pytest-timeout",
+]
+
+[project.scripts]
+offline-rl = "offline_rl.cli:main"
+
+[build-system]
+requires = ["uv_build>=0.12.9,<0.13.0"]
+build-backend = "uv_build"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+timeout = 300
